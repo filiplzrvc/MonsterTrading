@@ -1,5 +1,7 @@
-﻿namespace MTCG
+﻿
+namespace MTCG.Console
 {
+    using System;
     internal class Program
     {
         static void Main(string[] args)
@@ -8,3 +10,4 @@
         }
     }
 }
+
