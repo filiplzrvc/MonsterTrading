@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MTCG.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,13 @@ using System.Threading.Tasks;
 
 namespace MTCG.Cards.MonsterCards
 {
-    internal class Dragon
+    public class Dragon : MonsterCard
     {
+        public bool CanFly { get; private set; }
+
+        public Dragon() : base("Dragon", 100, "Fire")
+        {
+            CanFly = true; // Drache kann fliegen, eine spezifische Eigenschaft
+        }
     }
 }

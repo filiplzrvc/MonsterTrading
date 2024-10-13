@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace MTCG.Models
 {
-    internal class SpellCard
+    public class SpellCard : Card
     {
+        public string ElementType { get; set; }
+        
+
+        public SpellCard(string name, double damage, string elementType) : base(name, damage)
+        {
+            ElementType = elementType;
+        }
+
+        public override string GetCardType()
+        {
+            return "Spell";
+        }
     }
 }

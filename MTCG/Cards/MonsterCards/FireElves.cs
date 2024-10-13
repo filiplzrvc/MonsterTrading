@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MTCG.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,13 @@ using System.Threading.Tasks;
 
 namespace MTCG.Cards.MonsterCards
 {
-    internal class FireElves
+    public class FireElves : MonsterCard
     {
+        public bool CanEvadeDragons { get; private set; }
+
+        public FireElves() : base("Fire Elves", 60, "Fire")
+        {
+            CanEvadeDragons = true; // Feuerelfen können Drachen ausweichen
+        }
     }
 }

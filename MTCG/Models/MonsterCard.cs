@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace MTCG.Models
 {
-    internal class MonsterCard
+    public class MonsterCard : Card
     {
+
+        public string ElementType { get; set; }
+        public MonsterCard(string name, double damage, string elementype) : base(name, damage) 
+        {
+            ElementType = elementype;
+        }
+        public override string GetCardType()
+        {
+            return "Monster";
+        }
     }
 }

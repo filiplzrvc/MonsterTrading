@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MTCG.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,13 @@ using System.Threading.Tasks;
 
 namespace MTCG.Cards.SpellCards
 {
-    internal class WaterSpell
+    public class WaterSpell : SpellCard
     {
+        public bool IsEffectiveAgainstFire { get; private set; }
+
+        public WaterSpell() : base("Water Spell", 45, "Water")
+        {
+            IsEffectiveAgainstFire = true; // Wasserzauber ist besonders effektiv gegen Feuerkreaturen
+        }
     }
 }
