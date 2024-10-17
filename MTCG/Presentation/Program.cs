@@ -8,8 +8,11 @@ class Program
 {
     static void Main(string[] args)
     {
-        var registerService = new Register();
-        var loginService = new Login(registerService.GetUsers());
+        var db = new Database();
+        db.InitializeDatabase();
+
+        var registerService = new Register(db);
+        var loginService = new Login(db);
 
         // Initialisiere den RequestHandler
         var requestHandler = new RequestHandler(registerService, loginService);

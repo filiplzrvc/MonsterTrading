@@ -108,13 +108,6 @@
       <FileName>Services\Package.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MTCG.Services.Register">
-    <Position X="9" Y="6" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>MAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAEAAAAAAAAA=</HashCode>
-      <FileName>Services\Register.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="MTCG.Services.HttpServer">
     <Position X="13.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
@@ -164,10 +157,17 @@
       <FileName>Presentation\Program.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="MTCG.Services.Register">
+    <Position X="9" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Services\Register.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="MTCG.Services.Login">
     <Position X="9" Y="8.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAE=</HashCode>
+      <HashCode>AAAAgAAAAEAAAAAAAAAAABAAAAAAAAAAAAAAEAAAAAE=</HashCode>
       <FileName>Services\Login.cs</FileName>
     </TypeIdentifier>
   </Class>

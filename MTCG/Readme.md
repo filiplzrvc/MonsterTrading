@@ -37,3 +37,12 @@ Die API unterstützt folgende Endpunkte:
 
 - `POST /users`: Registrierung eines neuen Benutzers.
 - `POST /sessions`: Benutzer-Login und Token-Generierung.
+
+
+
+## Check Database
+1. docker exec -it MTCG psql -U admin
+2. \l
+3. \c mtcg
+4. \dt
+
