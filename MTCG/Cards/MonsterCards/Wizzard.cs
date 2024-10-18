@@ -9,7 +9,7 @@ namespace MTCG.Cards.MonsterCards
 {
     public class Wizzard : MonsterCard
     {
-        public bool CanControlOrks { get; private set; }
+        public bool CanControlOrks { get; set; }
 
         public Wizzard() : base("Wizzard", 75, "Normal")
         {

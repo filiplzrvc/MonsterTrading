@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using MTCG.Models;
 using System.Runtime.InteropServices;
 using Npgsql;
+using MTCG.Services.Database;
 
 
 
@@ -15,9 +16,9 @@ namespace MTCG.Services
     public class Login
     {
         private Dictionary<string, string> tokenStore = new Dictionary<string, string>();
-        private readonly Database _db;
+        private readonly Datalayer _db;
 
-        public Login(Database db)
+        public Login(Datalayer db)
         {
             _db = db;
         }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using MTCG.Models;
 using Npgsql;
+using MTCG.Services.Database;
 
 
 
@@ -13,12 +14,14 @@ namespace MTCG.Services
 {
     public class Register
     {
-        private readonly Database _db;
+        private readonly Datalayer _db;
 
-        public Register(Database db)
+        public Register(Datalayer db)
         {
             _db = db;
         }
+
+        public Datalayer DatabaseConnection { get { return _db; } }
 
 
         // Methode zur Benutzerregistrierung
@@ -41,9 +44,11 @@ namespace MTCG.Services
                 using (var checkCmd = new NpgsqlCommand("SELECT COUNT(*) FROM Users WHERE username = @username", connection))
                 {
                     checkCmd.Parameters.AddWithValue("username", username);
-                    var userCount = (long)checkCmd.ExecuteScalar();  // Gibt die Anzahl der Benutzer mit diesem Benutzernamen zurück
+                    
+                    var result = checkCmd.ExecuteScalar();
+                    long userCount = result != null ? (long)result : 0;// Gibt die Anzahl der Benutzer mit diesem Benutzernamen zurück
 
-                    if(userCount > 0)
+                    if (userCount > 0)
                     {
                         return GenerateResponse("error", "Username already exists!");
                     }

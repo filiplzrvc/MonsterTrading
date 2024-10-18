@@ -8,12 +8,7 @@ namespace MTCG.Models
 {
     public class MonsterCard : Card
     {
-
-        public string ElementType { get; set; }
-        public MonsterCard(string name, double damage, string elementype) : base(name, damage) 
-        {
-            ElementType = elementype;
-        }
+        public MonsterCard(string name, double damage, string elementype) : base(name, damage, elementype) {}
         public override string GetCardType()
         {
             return "Monster";

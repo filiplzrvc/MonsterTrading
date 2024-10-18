@@ -8,13 +8,7 @@ namespace MTCG.Models
 {
     public class SpellCard : Card
     {
-        public string ElementType { get; set; }
-        
-
-        public SpellCard(string name, double damage, string elementType) : base(name, damage)
-        {
-            ElementType = elementType;
-        }
+        public SpellCard(string name, double damage, string elementType) : base(name, damage, elementType){}
 
         public override string GetCardType()
         {

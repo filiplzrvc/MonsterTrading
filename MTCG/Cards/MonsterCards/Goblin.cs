@@ -9,7 +9,7 @@ namespace MTCG.Cards.MonsterCards
 {
     public class Goblin : MonsterCard
     {
-        public bool IsAfraidOfDragons { get; private set; }
+        public bool IsAfraidOfDragons { get; set; }
 
         public Goblin() : base("Goblin", 50, "Normal")
         {

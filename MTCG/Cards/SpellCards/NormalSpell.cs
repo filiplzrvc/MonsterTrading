@@ -9,7 +9,7 @@ namespace MTCG.Cards.SpellCards
 {
     public class NormalSpell : SpellCard
     {
-        public bool HasNoElementalEffect { get; private set; }
+        public bool HasNoElementalEffect { get; set; }
 
         public NormalSpell() : base("Normal Spell", 30, "Normal")
         {

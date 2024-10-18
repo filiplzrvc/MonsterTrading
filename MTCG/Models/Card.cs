@@ -10,11 +10,13 @@ namespace MTCG.Models
     {
         public string Name { get; set; }
         public double Damage { get; set; }
+        public string ElementType { get; set; }
 
-        public Card(string name, double damage)
+        public Card(string name, double damage, string elementType)
         {
             Name = name;
             Damage = damage;
+            ElementType = elementType;
         }
 
         public abstract string GetCardType();

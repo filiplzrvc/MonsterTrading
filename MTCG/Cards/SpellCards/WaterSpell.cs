@@ -9,7 +9,7 @@ namespace MTCG.Cards.SpellCards
 {
     public class WaterSpell : SpellCard
     {
-        public bool IsEffectiveAgainstFire { get; private set; }
+        public bool IsEffectiveAgainstFire { get; set; }
 
         public WaterSpell() : base("Water Spell", 45, "Water")
         {

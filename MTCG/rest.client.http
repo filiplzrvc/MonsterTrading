@@ -1,29 +1,122 @@
-﻿POST http://localhost:10001/users
+﻿
+
+#RegisterUser
+POST http://localhost:10001/users
 Content-Type: application/json
 
 {
-  "Username": "Muayad",
+  "Username": "Filip",
   "Password": "password123"
 }
 
 
 
 ###
+
+#LoginUser
 POST http://localhost:10001/sessions
 Content-Type: application/json
 
 {
-  "Username": "Muayad",
+  "Username": "Filip",
   "Password": "password123"
 }
 
 ###
-# VS integrated REST Client
 
-### a simple GET request
-GET http://localhost:10001/ HTTP/1.1
+#GetUser
+GET http://localhost:10001/users/Filip
+Content-Type: application/json
+
+###
+
+#DeleteUser
+DELETE http://localhost:10001/users/Filip
+Content-Type: application/json
 
 
+###
+
+#InsertCards
+POST http://localhost:10001/cards
+Content-Type: application/json
+
+[
+  {
+    "Name": "Dragon",
+    "Damage": 100,
+    "ElementType": "Fire",
+    "Type": "Monster"
+  },
+  {
+    "Name": "Fire Elves",
+    "Damage": 60,
+    "ElementType": "Fire",
+    "Type": "Monster"
+  },
+  {
+    "Name": "Goblin",
+    "Damage": 50,
+    "ElementType": "Normal",
+    "Type": "Monster"
+  },
+  
+  {
+    "Name": "Knights",
+    "Damage": 70,
+    "ElementType": "Normal",
+    "Type": "Monster"
+  },
+  {
+    "Name": "Kraken",
+    "Damage": 80,
+    "ElementType": "Water",
+    "Type": "Monster"
+  },
+  {
+    "Name": "Orks",
+    "Damage": 55,
+    "ElementType": "Normal",
+    "Type": "Monster"
+  },
+  {
+    "Name": "Wizzard",
+    "Damage": 75,
+    "ElementType": "Normal",
+    "Type": "Monster"
+  },
+  {
+    "Name": "Fire Spell",
+    "Damage": 40,
+    "ElementType": "Fire",
+    "Type": "Spell"
+  },
+  {
+    "Name": "Normal Spell",
+    "Damage": 30,
+    "ElementType": "Normal",
+    "Type": "Spell"
+  },
+  {
+    "Name": "Water Spell",
+    "Damage": 45,
+    "ElementType": "Water",
+    "Type": "Spell"
+  }
+]
+
+###
+
+#GetAllCards
+GET http://localhost:10001/cards
+
+
+###
+#DeleteAllCards
+DELETE http://localhost:10001/cards
+
+
+###
 
 ### a GET request from the integration-test script
 #curl -i -X GET http://localhost:10001/cards --header "Authorization: Bearer kienboec-mtcgToken"

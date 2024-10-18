@@ -9,7 +9,7 @@ namespace MTCG.Cards.MonsterCards
 {
     public class Dragon : MonsterCard
     {
-        public bool CanFly { get; private set; }
+        public bool CanFly { get; set; }
 
         public Dragon() : base("Dragon", 100, "Fire")
         {

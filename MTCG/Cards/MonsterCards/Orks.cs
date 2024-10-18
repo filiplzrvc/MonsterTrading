@@ -9,7 +9,7 @@ namespace MTCG.Cards.MonsterCards
 {
     public class Orks : MonsterCard
     {
-        public bool IsControlledByWizards { get; private set; }
+        public bool IsControlledByWizards { get; set; }
 
         public Orks() : base("Orks", 55, "Normal")
         {

@@ -9,7 +9,7 @@ namespace MTCG.Cards.MonsterCards
 {
     public class FireElves : MonsterCard
     {
-        public bool CanEvadeDragons { get; private set; }
+        public bool CanEvadeDragons { get; set; }
 
         public FireElves() : base("Fire Elves", 60, "Fire")
         {

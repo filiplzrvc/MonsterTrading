@@ -9,7 +9,7 @@ namespace MTCG.Cards.MonsterCards
 {
     public class Kraken : MonsterCard
     {
-        public bool IsImmuneToSpells { get; private set; }
+        public bool IsImmuneToSpells { get; set; }
 
         public Kraken() : base("Kraken", 80, "Water")
         {

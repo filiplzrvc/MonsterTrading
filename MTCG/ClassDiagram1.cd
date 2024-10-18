@@ -23,16 +23,6 @@
   </Class>
   <Class Name="MTCG.Cards.MonsterCards.Knights">
     <Position X="0.5" Y="4.75" Width="1.5" />
-    <InheritanceLine Type="MTCG.Models.MonsterCard" FixedToPoint="true">
-      <Path>
-        <Point X="1.25" Y="2.377" />
-        <Point X="1.25" Y="2.455" />
-        <Point X="0.372" Y="2.455" />
-        <Point X="0.372" Y="4.596" />
-        <Point X="1.25" Y="4.596" />
-        <Point X="1.25" Y="4.75" />
-      </Path>
-    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Cards\MonsterCards\Knights.cs</FileName>
@@ -83,7 +73,7 @@
   <Class Name="MTCG.Services.HTTP.RequestHandler">
     <Position X="13.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAABBgAAAAAABCAAAAAIAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <HashCode>AAAAABBgAIAAAABCAAAAAIAAAAAAAAIAAAAgAgIIAAA=</HashCode>
       <FileName>Services\HTTP\RequestHandler.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -109,7 +99,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="MTCG.Services.HttpServer">
-    <Position X="13.25" Y="3.5" Width="1.5" />
+    <Position X="13.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACQAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Services\HTTP\HttpServer.cs</FileName>
@@ -118,21 +108,21 @@
   <Class Name="MTCG.Models.Card">
     <Position X="3.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAACAAAAAAAAAAAAACAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAABACAAAAAAAAAAAAACAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Card.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MTCG.Models.MonsterCard">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\MonsterCard.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MTCG.Models.SpellCard">
     <Position X="6.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\SpellCard.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -160,7 +150,7 @@
   <Class Name="MTCG.Services.Register">
     <Position X="9" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>MAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <HashCode>MAAAgAAAAAAAAAAAAAAAAAAAAAAAACAAAEAAAAAAAAA=</HashCode>
       <FileName>Services\Register.cs</FileName>
     </TypeIdentifier>
   </Class>

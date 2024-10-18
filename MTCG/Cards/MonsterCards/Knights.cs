@@ -9,7 +9,7 @@ namespace MTCG.Cards.MonsterCards
 {
     public class Knights : MonsterCard
     {
-        public bool IsVulnerableToWater { get; private set; }
+        public bool IsVulnerableToWater { get; set; }
 
         public Knights() : base("Knight", 70, "Normal")
         {

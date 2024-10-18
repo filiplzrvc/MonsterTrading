@@ -16,7 +16,7 @@ namespace MTCG.Models
         public int GamesPlayed { get; set; } = 0;
         public int Wins { get; set; } = 0;
         public int Losses { get; set; } = 0;
-        public string AuthToken { get; set; }
+        public string? AuthToken { get; set; }
         public Stack UserStack { get; set; }
         public List<Card> Deck { get; set; }
 
