@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MTCG.Cards.MonsterCards;
-using MTCG.Cards.SpellCards;
+using MTCG.Models.Cards.MonsterCards;
+using MTCG.Models.Cards.SpellCards;
+using MTCG.Database;
 using MTCG.Models;
-using MTCG.Services.Database;
 using Npgsql;
 
 namespace MTCG.Services

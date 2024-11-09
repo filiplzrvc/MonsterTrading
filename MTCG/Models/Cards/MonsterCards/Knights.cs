@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MTCG.Cards.MonsterCards
+namespace MTCG.Models.Cards.MonsterCards
 {
     public class Knights : MonsterCard
     {

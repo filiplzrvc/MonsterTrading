@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MTCG.Services
+namespace MTCG.Models
 {
-    internal class Package
+    internal class Deck
     {
     }
 }

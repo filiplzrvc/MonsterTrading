@@ -12,11 +12,11 @@ namespace MTCG.Services.HTTP
 {
     public class RequestHandler
     {
-        private readonly Register registerService;
-        private readonly Login loginService;
+        private readonly RegisterService registerService;
+        private readonly LoginService loginService;
         private readonly CardService cardService;
 
-        public RequestHandler(Register registerService, Login loginService, CardService cardService)
+        public RequestHandler(RegisterService registerService, LoginService loginService, CardService cardService)
         {
             this.registerService = registerService;
             this.loginService = loginService;

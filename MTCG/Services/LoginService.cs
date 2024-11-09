@@ -7,18 +7,18 @@ using System.Collections.Generic;
 using MTCG.Models;
 using System.Runtime.InteropServices;
 using Npgsql;
-using MTCG.Services.Database;
+using MTCG.Database;
 
 
 
 namespace MTCG.Services
 {
-    public class Login
+    public class LoginService
     {
         private Dictionary<string, string> tokenStore = new Dictionary<string, string>();
         private readonly Datalayer _db;
 
-        public Login(Datalayer db)
+        public LoginService(Datalayer db)
         {
             _db = db;
         }
@@ -46,7 +46,7 @@ namespace MTCG.Services
                         if(reader.Read())
                         {
                             string storedHashedPassword = reader.GetString(1);
-                            if(PasswordHash.VerifyPassword(password, storedHashedPassword))
+                            if(PasswordHashService.VerifyPassword(password, storedHashedPassword))
                             {
                                 // Token generieren
                                 string token = GenerateToken(username);

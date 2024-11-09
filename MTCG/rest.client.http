@@ -5,7 +5,7 @@ POST http://localhost:10001/users
 Content-Type: application/json
 
 {
-  "Username": "Filip",
+  "Username": "Bertan",
   "Password": "password123"
 }
 
@@ -18,7 +18,7 @@ POST http://localhost:10001/sessions
 Content-Type: application/json
 
 {
-  "Username": "Filip",
+  "Username": "Bertan",
   "Password": "password123"
 }
 
@@ -31,7 +31,7 @@ Content-Type: application/json
 ###
 
 #DeleteUser
-DELETE http://localhost:10001/users/Filip
+DELETE http://localhost:10001/users/Lizy
 Content-Type: application/json
 
 

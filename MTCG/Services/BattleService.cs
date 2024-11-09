@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MTCG.Services
 {
-    internal class Battle
+    internal class BattleService
     {
     }
 }

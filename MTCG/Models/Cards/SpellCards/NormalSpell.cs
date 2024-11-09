@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MTCG.Cards.SpellCards
+namespace MTCG.Models.Cards.SpellCards
 {
     public class NormalSpell : SpellCard
     {

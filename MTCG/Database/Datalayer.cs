@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
 
-namespace MTCG.Services.Database
+namespace MTCG.Database
 {
     public class Datalayer
     {

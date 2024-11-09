@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using MTCG.Models;
 using Npgsql;
-using MTCG.Services.Database;
+using MTCG.Database;
 
 
 
 namespace MTCG.Services
 {
-    public class Register
+    public class RegisterService
     {
         private readonly Datalayer _db;
 
-        public Register(Datalayer db)
+        public RegisterService(Datalayer db)
         {
             _db = db;
         }
@@ -34,7 +34,7 @@ namespace MTCG.Services
             }
 
             // Passwort hashen bevor es gespeichert wird
-            string hashedPassword = PasswordHash.HashPassword(password);
+            string hashedPassword = PasswordHashService.HashPassword(password);
 
             // Überprüfen, ob der Benutzername bereits existiert
             using (var connection = _db.GetConnection())

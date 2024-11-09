@@ -3,8 +3,7 @@ using System.Net.Sockets;
 using System.Text;
 using MTCG.Services;
 using MTCG.Services.HTTP;
-using MTCG.Services.Database;
-
+using MTCG.Database;
 class Program
 {
     static void Main(string[] args)
@@ -12,8 +11,8 @@ class Program
         var db = new Datalayer();
         db.InitializeDatabase();
 
-        var registerService = new Register(db);
-        var loginService = new Login(db);
+        var registerService = new RegisterService(db);
+        var loginService = new LoginService(db);
         var cardService = new CardService(db);
 
         // Initialisiere den RequestHandler

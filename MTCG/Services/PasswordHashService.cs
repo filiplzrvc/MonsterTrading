@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace MTCG.Services
 {
-    public class PasswordHash
+    public class PasswordHashService
     {
         // Methode zum Hashen des Passworts
         public static string HashPassword(string password)
