@@ -26,19 +26,34 @@ namespace MTCG.Services
             while (true)
             {
                 var client = server.AcceptTcpClient();
-                using var writer = new StreamWriter(client.GetStream()) { AutoFlush = true };
-                using var reader = new StreamReader(client.GetStream());
 
+                // Erstelle einen neuen Thread für die Client-Verbindung
+                var clientThread = new Thread(HandleClient);
+                clientThread.Start(client);
+            }
+        }
+
+        private void HandleClient(object? clientObject)
+        {
+            if (clientObject is not TcpClient client)
+            {
+                return;
+            }
+
+            using var writer = new StreamWriter(client.GetStream()) { AutoFlush = true };
+            using var reader = new StreamReader(client.GetStream());
+
+            try
+            {
                 // 1. Erste Zeile des HTTP-Requests einlesen
                 string? line = reader.ReadLine();
                 if (string.IsNullOrEmpty(line))
                 {
-                    continue;  // Wenn die Zeile leer ist, warte auf die nächste Verbindung
+                    return; // Keine gültige Anfrage, Verbindung schließen
                 }
 
                 var httpParts = line.Split(' ');
 
-                // Füge die Überprüfung der Länge hinzu
                 if (httpParts.Length < 3)
                 {
                     Console.WriteLine("Invalid HTTP request line.");
@@ -46,7 +61,7 @@ namespace MTCG.Services
                     writer.WriteLine("Content-Type: text/plain");
                     writer.WriteLine();
                     writer.WriteLine("Error: Invalid request");
-                    continue;  // gehe zur nächsten Verbindung
+                    return;
                 }
 
                 var method = httpParts[0];  // z.B. "POST"
@@ -56,28 +71,34 @@ namespace MTCG.Services
                 Console.WriteLine($"Method: {method}, Path: {path}, Version: {version}");
 
                 // 2. Header des HTTP-Requests lesen
+                var headers = new Dictionary<string, string>();
                 int contentLength = 0;
                 while ((line = reader.ReadLine()) != null)
                 {
                     if (line.Length == 0)
-                        break;  // Leere Zeile markiert das Ende der HTTP-Header
+                        break; // Leere Zeile markiert das Ende der HTTP-Header
 
-                    var headerParts = line.Split(':');
-                    if (headerParts.Length > 1)
+                    var headerParts = line.Split(':', 2);
+                    if (headerParts.Length == 2)
                     {
-                        var headerName = headerParts[0];
+                        var headerName = headerParts[0].Trim();
                         var headerValue = headerParts[1].Trim();
-                        Console.WriteLine($"Header: {headerName} = {headerValue}");
-                        if (headerName == "Content-Length")
+                        headers[headerName] = headerValue;
+
+                        if (headerName.Equals("Content-Length", StringComparison.OrdinalIgnoreCase))
                         {
-                            if (!int.TryParse(headerValue, out contentLength))
+                            if (int.TryParse(headerValue, out var length))
+                            {
+                                contentLength = length;
+                            }
+                            else
                             {
                                 Console.WriteLine("Invalid Content-Length header.");
                                 writer.WriteLine("HTTP/1.0 400 Bad Request");
                                 writer.WriteLine("Content-Type: text/plain");
                                 writer.WriteLine();
                                 writer.WriteLine("Error: Invalid Content-Length");
-                                continue;
+                                return;
                             }
                         }
                     }
@@ -88,22 +109,20 @@ namespace MTCG.Services
                 if (contentLength > 0)
                 {
                     char[] buffer = new char[contentLength];
-                    int totalBytesRead = 0;
-                    while (totalBytesRead < contentLength)
-                    {
-                        var bytesRead = reader.Read(buffer, totalBytesRead, contentLength - totalBytesRead);
-                        if (bytesRead == 0)
-                        {
-                            break;  // Keine weiteren Daten vorhanden
-                        }
-                        totalBytesRead += bytesRead;
-                    }
+                    reader.ReadBlock(buffer, 0, contentLength);
                     requestBody.Append(buffer);
-                    Console.WriteLine($"Request Body: {requestBody.ToString()}");
                 }
 
                 // 4. Übergibt die Anfrage an den RequestHandler
-                _requestHandler.HandleRequest(method, path, requestBody.ToString(), writer);
+                _requestHandler.HandleRequest(method, path, requestBody.ToString(), writer, headers);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error handling client request: {ex.Message}");
+            }
+            finally
+            {
+                client.Close();
             }
         }
     }

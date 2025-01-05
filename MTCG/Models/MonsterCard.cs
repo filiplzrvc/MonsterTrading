@@ -13,5 +13,11 @@ namespace MTCG.Models
         {
             return "Monster";
         }
+
+        // Factory-Methode
+        public static MonsterCard CreateFromJson(dynamic rawCard)
+        {
+            return new MonsterCard(rawCard.Name, (double)rawCard.Damage, rawCard.ElementType ?? "Neutral");
+        }
     }
 }

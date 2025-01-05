@@ -5,10 +5,9 @@ POST http://localhost:10001/users
 Content-Type: application/json
 
 {
-  "Username": "Bertan",
-  "Password": "password123"
+  "Username": "altenhof",
+  "Password": "1234"
 }
-
 
 
 ###
@@ -18,94 +17,152 @@ POST http://localhost:10001/sessions
 Content-Type: application/json
 
 {
-  "Username": "Bertan",
-  "Password": "password123"
+  "Username": "altenhof",
+  "Password": "1234"
 }
 
 ###
 
 #GetUser
-GET http://localhost:10001/users/Bertan
+GET http://localhost:10001/users/kienboec
 Content-Type: application/json
+Authorization: Bearer kienboec-mtcgToken
+
+###
+
+# 3. Paket erstellen (nur Admin)
+POST http://localhost:10001/packages
+Authorization: Bearer admin-mtcgToken
+Content-Type: application/json
+
+[
+    {
+        "Id": "845f0dc7-37d0-426e-994e-43fc3ac83c08",
+        "Name": "WaterGoblin",
+        "Damage": 10.0,
+        "ElementType": "Water",
+        "Type": "Monster"
+    },
+    {
+        "Id": "99f8f8dc-e25e-4a95-aa2c-782823f36e2a",
+        "Name": "Dragon",
+        "Damage": 50.0,
+        "ElementType": "Fire",
+        "Type": "Monster"
+    },
+    {
+        "Id": "e85e3976-7c86-4d06-9a80-641c2019a79f",
+        "Name": "WaterSpell",
+        "Damage": 20.0,
+        "ElementType": "Water",
+        "Type": "Spell"
+    },
+    {
+        "Id": "1cb6ab86-bdb2-47e5-b6e4-68c5ab389334",
+        "Name": "Ork",
+        "Damage": 45.0,
+        "ElementType": "Earth",
+        "Type": "Monster"
+    },
+    {
+        "Id": "dfdd758f-649c-40f9-ba3a-8657f4b3439f",
+        "Name": "FireSpell",
+        "Damage": 25.0,
+        "ElementType": "Fire",
+        "Type": "Spell"
+    }
+]
+
+
+###
+
+
+# Paket kaufen
+POST http://localhost:10001/transactions/packages
+Content-Type: application/json
+Authorization: Bearer admin-mtcgToken
+
+###
+
+
+
+###
+
+# Abrufen aller verfügbaren Packages
+GET http://localhost:10001/packages
+Authorization: Bearer admin-mtcgToken
+
+###
+
+### Configure Deck
+PUT http://localhost:10001/deck
+Content-Type: application/json
+Authorization: Bearer admin-mtcgToken
+
+[
+  "1cb6ab86-bdb2-47e5-b6e4-68c5ab389334",
+  "99f8f8dc-e25e-4a95-aa2c-782823f36e2a",
+  "e85e3976-7c86-4d06-9a80-641c2019a79f",
+  "dfdd758f-649c-40f9-ba3a-8657f4b3439f"
+]
+
+###
+
+
+### Start Battle for kienboec
+POST http://localhost:10001/battles
+Authorization: Bearer kienboec-mtcgToken
+Content-Type: application/json
+
+{}
+
+### Start Battle for altenhof
+POST http://localhost:10001/battles
+Authorization: Bearer altenhof-mtcgToken
+Content-Type: application/json
+
+{}
+
+
+### Update user data
+PUT http://localhost:10001/users/kienboec
+Content-Type: application/json
+Authorization: Bearer kienboec-mtcgToken
+
+{
+  "Name": "Kienboeck",
+  "Bio": "me playin...",
+  "Image": ":-)"
+}
+
+###
+
+# GET stats - Retrieve user stats
+GET http://localhost:10001/stats
+Content-Type: application/json
+Authorization: Bearer kienboec-mtcgToken
+
+
+###
+
+### Abrufen des Scoreboards
+GET http://localhost:10001/scoreboard
+
+###
+
+GET http://localhost:10001/tradings --header "Authorization: Bearer kienboec-mtcgToken"
+
 
 ###
 
 #DeleteUser
-DELETE http://localhost:10001/users/Lizy
+DELETE http://localhost:10001/users/filip
 Content-Type: application/json
 
 
 ###
 
-#InsertCards
-POST http://localhost:10001/cards
-Content-Type: application/json
 
-[
-  {
-    "Name": "Dragon",
-    "Damage": 100,
-    "ElementType": "Fire",
-    "Type": "Monster"
-  },
-  {
-    "Name": "Fire Elves",
-    "Damage": 60,
-    "ElementType": "Fire",
-    "Type": "Monster"
-  },
-  {
-    "Name": "Goblin",
-    "Damage": 50,
-    "ElementType": "Normal",
-    "Type": "Monster"
-  },
-  
-  {
-    "Name": "Knights",
-    "Damage": 70,
-    "ElementType": "Normal",
-    "Type": "Monster"
-  },
-  {
-    "Name": "Kraken",
-    "Damage": 80,
-    "ElementType": "Water",
-    "Type": "Monster"
-  },
-  {
-    "Name": "Orks",
-    "Damage": 55,
-    "ElementType": "Normal",
-    "Type": "Monster"
-  },
-  {
-    "Name": "Wizzard",
-    "Damage": 75,
-    "ElementType": "Normal",
-    "Type": "Monster"
-  },
-  {
-    "Name": "Fire Spell",
-    "Damage": 40,
-    "ElementType": "Fire",
-    "Type": "Spell"
-  },
-  {
-    "Name": "Normal Spell",
-    "Damage": 30,
-    "ElementType": "Normal",
-    "Type": "Spell"
-  },
-  {
-    "Name": "Water Spell",
-    "Damage": 45,
-    "ElementType": "Water",
-    "Type": "Spell"
-  }
-]
-
-###
 
 #GetAllCards
 GET http://localhost:10001/cards
@@ -115,22 +172,87 @@ GET http://localhost:10001/cards
 #DeleteAllCards
 DELETE http://localhost:10001/cards
 
+###
+
+
+# Karten aus Stack anzeigen
+GET http://localhost:10001/cards
+Authorization: Bearer admin-mtcgToken 
 
 ###
 
-### a GET request from the integration-test script
-#curl -i -X GET http://localhost:10001/cards --header "Authorization: Bearer kienboec-mtcgToken"
-GET http://localhost:10001/cards HTTP/1.1
-Authorization: Bearer kienboec-mtcgToken
+# Kein Token (FAIL)
+GET http://localhost:10001/cards
 
 
+###
 
-### POST request from the integration-test script
-#curl -i -X POST http://localhost:10001/users --header "Content-Type: application/json" -d "{\"Username\":\"kienboec\", \"Password\":\"daniel\"}"
-POST http://localhost:10001/users HTTP/1.1
-Content-Type: application/json
+# InsertCards
+# POST http://localhost:10001/cards
+# Content-Type: application/json
 
-{
-    "Username":"kienboec", 
-    "Password":"daniel"
-}
+# [
+#   {
+#     "Name": "Dragon",
+#     "Damage": 100,
+#     "ElementType": "Fire",
+#     "Type": "Monster"
+#   },
+#   {
+#     "Name": "Fire Elves",
+#     "Damage": 60,
+#     "ElementType": "Fire",
+#     "Type": "Monster"
+#   },
+#   {
+#     "Name": "Goblin",
+#     "Damage": 50,
+#     "ElementType": "Normal",
+#     "Type": "Monster"
+#   },
+  
+#   {
+#     "Name": "Knights",
+#     "Damage": 70,
+#     "ElementType": "Normal",
+#     "Type": "Monster"
+#   },
+#   {
+#     "Name": "Kraken",
+#     "Damage": 80,
+#     "ElementType": "Water",
+#     "Type": "Monster"
+#   },
+#   {
+#     "Name": "Orks",
+#     "Damage": 55,
+#     "ElementType": "Normal",
+#     "Type": "Monster"
+#   },
+#   {
+#     "Name": "Wizzard",
+#     "Damage": 75,
+#     "ElementType": "Normal",
+#     "Type": "Monster"
+#   },
+#   {
+#     "Name": "Fire Spell",
+#     "Damage": 40,
+#     "ElementType": "Fire",
+#     "Type": "Spell"
+#   },
+#   {
+#     "Name": "Normal Spell",
+#     "Damage": 30,
+#     "ElementType": "Normal",
+#     "Type": "Spell"
+#   },
+#   {
+#     "Name": "Water Spell",
+#     "Damage": 45,
+#     "ElementType": "Water",
+#     "Type": "Spell"
+#   }
+# ]
+
+###

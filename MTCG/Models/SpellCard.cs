@@ -14,5 +14,11 @@ namespace MTCG.Models
         {
             return "Spell";
         }
+
+        // Factory-Methode
+        public static SpellCard CreateFromJson(dynamic rawCard)
+        {
+            return new SpellCard(rawCard.Name, (double)rawCard.Damage, rawCard.ElementType ?? "Neutral");
+        }
     }
 }

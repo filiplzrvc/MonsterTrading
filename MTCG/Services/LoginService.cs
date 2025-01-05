@@ -15,13 +15,13 @@ namespace MTCG.Services
 {
     public class LoginService
     {
-        private Dictionary<string, string> tokenStore = new Dictionary<string, string>();
         private readonly Datalayer _db;
 
         public LoginService(Datalayer db)
         {
             _db = db;
         }
+        
 
         // Methode zur Benutzeranmeldung
         public string LoginUser(string username, string password)
@@ -37,7 +37,7 @@ namespace MTCG.Services
             {
                 connection.Open();
 
-                using(var cmd = new NpgsqlCommand("SELECT id, password FROM Users WHERE username = @username", connection))
+                using(var cmd = new NpgsqlCommand("SELECT id, password, original_username FROM Users WHERE username = @username", connection))
                 {
                     cmd.Parameters.AddWithValue("username", username);
 
@@ -46,10 +46,11 @@ namespace MTCG.Services
                         if(reader.Read())
                         {
                             string storedHashedPassword = reader.GetString(1);
-                            if(PasswordHashService.VerifyPassword(password, storedHashedPassword))
+                            string originalUsername = reader.GetString(2);
+                            if (PasswordHashService.VerifyPassword(password, storedHashedPassword))
                             {
                                 // Token generieren
-                                string token = GenerateToken(username);
+                                string token = $"{originalUsername}-mtcgToken";
 
                                 // Token in der Datenbank speichern
                                 SaveAuthToken(reader.GetInt32(0), token);
@@ -98,11 +99,6 @@ namespace MTCG.Services
                     }
                 }
             }
-        }
-
-        private static string GenerateToken(string username) 
-        {
-           return Guid.NewGuid().ToString();
-        }
+        }     
     }
 }

@@ -17,3 +17,4 @@ namespace MTCG.Models.Cards.MonsterCards
         }
     }
 }
+

@@ -9,18 +9,20 @@ namespace MTCG.Models
 {
     public class User
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public int Id { get; set; }
+        public string Username { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;   
         public int Coins { get; set; } = 20;
         public int Elo { get; set; } = 100;
         public int GamesPlayed { get; set; } = 0;
         public int Wins { get; set; } = 0;
         public int Losses { get; set; } = 0;
         public string? AuthToken { get; set; }
-        public Stack UserStack { get; set; }
-        public List<Card> Deck { get; set; }
+        public Stack UserStack { get; set; } = new Stack();
+        public List<Card> Deck { get; set; } = new List<Card>();
+        public string OriginalUsername { get; set; }
 
-
+        public User() { }
         public User(string Username, string Password)
         {
             this.Username = Username;

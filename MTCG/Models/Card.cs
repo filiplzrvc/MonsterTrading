@@ -8,6 +8,7 @@ namespace MTCG.Models
 {
     public abstract class Card
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public double Damage { get; set; }
         public string ElementType { get; set; }
