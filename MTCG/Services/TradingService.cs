@@ -89,10 +89,10 @@ namespace MTCG.Services
 
                 // Überprüfen, ob die Karte gültig ist und den Anforderungen entspricht
                 using (var validateCardCmd = new NpgsqlCommand(@"
-            SELECT c.id, c.damage 
-            FROM UserCards uc
-            INNER JOIN Cards c ON uc.card_id = c.id
-            WHERE uc.user_id = @userId AND c.id = @cardId::UUID", connection))
+                    SELECT c.id, c.damage 
+                    FROM UserCards uc
+                    INNER JOIN Cards c ON uc.card_id = c.id
+                    WHERE uc.user_id = @userId AND c.id = @cardId::UUID", connection))
                 {
                     validateCardCmd.Parameters.AddWithValue("userId", userId);
                     validateCardCmd.Parameters.AddWithValue("cardId", offeredCardId);
@@ -119,8 +119,8 @@ namespace MTCG.Services
                     {
                         // Entferne Karte des Anbieters
                         using (var deleteCmd = new NpgsqlCommand(@"
-                    DELETE FROM UserCards 
-                    WHERE user_id = @dealUserId AND card_id = @dealCardId::UUID", connection))
+                            DELETE FROM UserCards 
+                            WHERE user_id = @dealUserId AND card_id = @dealCardId::UUID", connection))
                         {
                             deleteCmd.Parameters.AddWithValue("dealUserId", deal.UserId);
                             deleteCmd.Parameters.AddWithValue("dealCardId", deal.CardToTrade);
@@ -129,8 +129,8 @@ namespace MTCG.Services
 
                         // Fügt Karte des Käufers zum Anbieter hinzu
                         using (var insertCmd = new NpgsqlCommand(@"
-                    INSERT INTO UserCards (user_id, card_id) 
-                    VALUES (@dealUserId, @offeredCardId::UUID)", connection))
+                            INSERT INTO UserCards (user_id, card_id) 
+                            VALUES (@dealUserId, @offeredCardId::UUID)", connection))
                         {
                             insertCmd.Parameters.AddWithValue("dealUserId", deal.UserId);
                             insertCmd.Parameters.AddWithValue("offeredCardId", offeredCardId);

@@ -1,5 +1,4 @@
-﻿using MTCG.Database;
-using MTCG.Models;
+﻿using MTCG.Models;
 
 namespace MTCG.Services.Interfaces
 {

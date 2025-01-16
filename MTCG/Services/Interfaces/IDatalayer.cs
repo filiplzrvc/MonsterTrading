@@ -1,5 +1,4 @@
-﻿using MTCG.Models;
-using Npgsql;
+﻿using Npgsql;
 
 namespace MTCG.Services.Interfaces
 {

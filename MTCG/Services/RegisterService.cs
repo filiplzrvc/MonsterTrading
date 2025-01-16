@@ -89,9 +89,9 @@ namespace MTCG.Services
             {
                 connection.Open();
                 using (var cmd = new NpgsqlCommand(@"
-            SELECT id, username, password, coins, elo, games_played, wins, losses
-            FROM Users
-            WHERE id = @userId;", connection))
+                    SELECT id, username, password, coins, elo, games_played, wins, losses
+                    FROM Users
+                    WHERE id = @userId;", connection))
                 {
                     cmd.Parameters.AddWithValue("userId", userId);
 
@@ -211,8 +211,6 @@ namespace MTCG.Services
             }
             return null;
         }
-
-
 
         // Hilfsmethode zum Erstellen der JSON-Antwort
         private string GenerateResponse(string key, string message)

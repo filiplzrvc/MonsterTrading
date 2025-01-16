@@ -10,7 +10,7 @@ namespace MTCG.Database
 
         public Datalayer()
         {
-            // Verbindungszeichenfolge - sollte aus Umgebungsvariablen oder einer Konfigurationsdatei geladen werden
+           
             _connectionString = "Host=localhost;Port=5432;Username=admin;Password=admin123;Database=mtcg";
         }
 

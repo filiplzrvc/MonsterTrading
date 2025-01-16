@@ -49,28 +49,6 @@ namespace MTCG.Tests.ServicesTests
             // Assert
             Assert.That(result, Is.EqualTo("{\"error\": \"Username and password cannot be empty.\"}"));
         }
-
-        //[Test]
-        //public void LoginUser_ShouldReturnError_WhenUserDoesNotExist()
-        //{
-        //    // Arrange
-        //    var mockConnection = new Mock<NpgsqlConnection>();
-        //    var mockCommand = new Mock<NpgsqlCommand>();
-        //    var mockReader = new Mock<NpgsqlDataReader>();
-
-        //    mockReader.Setup(r => r.Read()).Returns(false); // Benutzer nicht gefunden
-        //    mockCommand.Setup(cmd => cmd.ExecuteReader()).Returns(mockReader.Object);
-        //    mockConnection.Setup(conn => conn.CreateCommand()).Returns(mockCommand.Object);
-        //    _mockDatalayer.Setup(db => db.GetConnection()).Returns(mockConnection.Object);
-
-        //    // Act
-        //    var result = _loginService.LoginUser("nonexistentUser", "Password123!");
-
-        //    // Assert
-        //    Assert.That(result, Is.EqualTo("{\"error\": \"Invalid username or password.\"}"));
-        //}
-
-
     }
 }
     

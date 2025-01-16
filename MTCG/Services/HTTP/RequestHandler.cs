@@ -210,11 +210,6 @@ namespace MTCG.Services.HTTP
         }
 
 
-
-
-
-
-
         private void HandleGetTradingDeals(StreamWriter writer)
         {
             try
@@ -238,7 +233,6 @@ namespace MTCG.Services.HTTP
                 SendResponse(writer, "HTTP/1.0 500 Internal Server Error", $"{{\"error\":\"{ex.Message}\"}}", "application/json");
             }
         }
-
 
 
         private void HandleCreateTradingDeal(string body, StreamWriter writer, Dictionary<string, string> headers)
@@ -310,9 +304,6 @@ namespace MTCG.Services.HTTP
                 SendResponse(writer, "HTTP/1.0 500 Internal Server Error", $"{{\"error\":\"{ex.Message}\"}}", "application/json");
             }
         }
-
-
-
 
 
         private void HandleDeleteTradingDeal(string path, StreamWriter writer, Dictionary<string, string> headers)
@@ -413,9 +404,9 @@ namespace MTCG.Services.HTTP
             {
                 connection.Open();
                 using (var cmd = new NpgsqlCommand(@"
-            SELECT games_played, wins, losses, elo 
-            FROM Users 
-            WHERE id = @userId", connection))
+                    SELECT games_played, wins, losses, elo 
+                    FROM Users 
+                    WHERE id = @userId", connection))
                 {
                     cmd.Parameters.AddWithValue("userId", user.Id);
                     using (var reader = cmd.ExecuteReader())

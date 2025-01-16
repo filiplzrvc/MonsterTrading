@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using Moq;
 using MTCG.Services;
-using MTCG.Database;
 using MTCG.Models;
 using MTCG.Models.Cards.MonsterCards;
 using MTCG.Models.Cards.SpellCards;

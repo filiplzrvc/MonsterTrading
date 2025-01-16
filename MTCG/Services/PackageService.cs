@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MTCG.Models;
-using MTCG.Database;
 using MTCG.Models.Cards.MonsterCards;
 using MTCG.Models.Cards.SpellCards;
 using Npgsql;

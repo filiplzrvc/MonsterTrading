@@ -4,7 +4,6 @@ using NUnit.Framework;
 using Npgsql;
 using MTCG.Models;
 using MTCG.Services;
-using MTCG.Database;
 using MTCG.Services.Interfaces;
 using System.Data;
 
@@ -34,7 +33,8 @@ namespace MTCG.Tests
             var result = _registerService.RegisterUser(username, password);
 
             // Assert
-            Assert.AreEqual("{\"error\": \"Username and password cannot be empty.\"}", result);
+            Assert.That(result, Is.EqualTo("{\"error\": \"Username and password cannot be empty.\"}"));
+
         }
     }
 }
