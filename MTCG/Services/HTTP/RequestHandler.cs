@@ -9,6 +9,7 @@ using Npgsql;
 using MTCG.Models;
 using System.Reflection.PortableExecutable;
 using MTCG.Services.Interfaces;
+using System.Collections.Concurrent;
 
 namespace MTCG.Services.HTTP
 {
@@ -20,6 +21,7 @@ namespace MTCG.Services.HTTP
         private readonly PackageService _packageService;
         private readonly TradingService tradingService;
         private readonly BattleService battleService;
+        private static readonly ConcurrentQueue<User> BattleQueue = new ConcurrentQueue<User>();
 
         public RequestHandler(RegisterService registerService, LoginService loginService, CardService cardService, PackageService packageService, TradingService tradingService, BattleService battleService)
         {
@@ -188,26 +190,12 @@ namespace MTCG.Services.HTTP
                 return;
             }
 
-            var opponent = registerService.GetRandomOpponent(user);
-            if (opponent == null || string.IsNullOrWhiteSpace(opponent.AuthToken))
-            {
-                SendResponse(writer, "HTTP/1.0 404 Not Found", "{\"error\":\"No opponents available\"}", "application/json");
-                return;
-            }
+            // Spieler in die Battle-Queue einreihen oder ein Battle starten
+            var response = battleService.QueueBattle(token);
 
-            try
-            {
-                // Battle starten
-                var battleResult = battleService.StartBattleWithThread(token, opponent.AuthToken);
-
-                // Übergabe der formatierten JSON-Antwort
-                SendResponse(writer, "HTTP/1.0 200 OK", battleResult, "application/json");
-            }
-            catch (Exception ex)
-            {
-                SendResponse(writer, "HTTP/1.0 500 Internal Server Error", $"{{\"error\":\"{ex.Message}\"}}", "application/json");
-            }
+            SendResponse(writer, "HTTP/1.0 200 OK", $"{{\"message\":\"{response}\"}}", "application/json");
         }
+
 
 
         private void HandleGetTradingDeals(StreamWriter writer)
@@ -675,7 +663,7 @@ namespace MTCG.Services.HTTP
             List<Card> cards;
             try
             {
-                cards = DeserializeCards(body); // Verwende die Deserialisierungsmethode
+                cards = DeserializeCards(body);
             }
             catch (Exception ex)
             {

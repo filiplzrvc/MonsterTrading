@@ -17,11 +17,35 @@ namespace MTCG.Services
         private readonly ICardService _cardService;
         private readonly IRegisterService _registerService;
         private static readonly ConcurrentDictionary<int, object> BattleLocks = new ConcurrentDictionary<int, object>();
+        private static readonly ConcurrentQueue<User> BattleQueue = new ConcurrentQueue<User>();
+        private static readonly object QueueLock = new object();
 
         public BattleService(ICardService cardService, IRegisterService registerService)
         {
             _cardService = cardService;
             _registerService = registerService;
+        }
+
+        public string QueueBattle(string token)
+        {
+            var user = _registerService.GetUserByToken(token);
+            if (user == null)
+            {
+                return "Error: User not authenticated.";
+            }
+
+            lock (QueueLock)
+            {
+                if (BattleQueue.TryDequeue(out var opponent))
+                {
+                    return StartBattleWithThread(user.AuthToken, opponent.AuthToken);
+                }
+                else
+                {
+                    BattleQueue.Enqueue(user);
+                    return $"Waiting for an opponent... (Player {user.Username} is in queue)";
+                }
+            }
         }
 
         public string StartBattleWithThread(string token1, string token2, int timeoutInSeconds = 30)

@@ -5,7 +5,7 @@ POST http://localhost:10001/users
 Content-Type: application/json
 
 {
-  "Username": "altenhof",
+  "Username": "admin",
   "Password": "1234"
 }
 
@@ -17,7 +17,7 @@ POST http://localhost:10001/sessions
 Content-Type: application/json
 
 {
-  "Username": "altenhof",
+  "Username": "admin",
   "Password": "1234"
 }
 
@@ -80,7 +80,7 @@ Content-Type: application/json
 # Paket kaufen
 POST http://localhost:10001/transactions/packages
 Content-Type: application/json
-Authorization: Bearer admin-mtcgToken
+Authorization: Bearer TestUser2-mtcgToken
 
 ###
 
@@ -97,7 +97,7 @@ Authorization: Bearer admin-mtcgToken
 ### Configure Deck
 PUT http://localhost:10001/deck
 Content-Type: application/json
-Authorization: Bearer admin-mtcgToken
+Authorization: Bearer TestUser2-mtcgToken
 
 [
   "1cb6ab86-bdb2-47e5-b6e4-68c5ab389334",
@@ -187,72 +187,11 @@ GET http://localhost:10001/cards
 
 ###
 
-# InsertCards
-# POST http://localhost:10001/cards
-# Content-Type: application/json
 
-# [
-#   {
-#     "Name": "Dragon",
-#     "Damage": 100,
-#     "ElementType": "Fire",
-#     "Type": "Monster"
-#   },
-#   {
-#     "Name": "Fire Elves",
-#     "Damage": 60,
-#     "ElementType": "Fire",
-#     "Type": "Monster"
-#   },
-#   {
-#     "Name": "Goblin",
-#     "Damage": 50,
-#     "ElementType": "Normal",
-#     "Type": "Monster"
-#   },
-  
-#   {
-#     "Name": "Knights",
-#     "Damage": 70,
-#     "ElementType": "Normal",
-#     "Type": "Monster"
-#   },
-#   {
-#     "Name": "Kraken",
-#     "Damage": 80,
-#     "ElementType": "Water",
-#     "Type": "Monster"
-#   },
-#   {
-#     "Name": "Orks",
-#     "Damage": 55,
-#     "ElementType": "Normal",
-#     "Type": "Monster"
-#   },
-#   {
-#     "Name": "Wizzard",
-#     "Damage": 75,
-#     "ElementType": "Normal",
-#     "Type": "Monster"
-#   },
-#   {
-#     "Name": "Fire Spell",
-#     "Damage": 40,
-#     "ElementType": "Fire",
-#     "Type": "Spell"
-#   },
-#   {
-#     "Name": "Normal Spell",
-#     "Damage": 30,
-#     "ElementType": "Normal",
-#     "Type": "Spell"
-#   },
-#   {
-#     "Name": "Water Spell",
-#     "Damage": 45,
-#     "ElementType": "Water",
-#     "Type": "Spell"
-#   }
-# ]
+### TestUser1 tritt der Battle-Queue bei
+POST http://localhost:10001/battles
+Authorization: Bearer TestUser1-mtcgToken
 
-###
+### TestUser2 tritt der Battle-Queue bei (sollte ein Match starten)
+POST http://localhost:10001/battles
+Authorization: Bearer TestUser2-mtcgToken
